@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<body>
+    <wicket:extend>
+
+        <div class="row">
+            <div class="col-xl-1 d-flex justify-content-center">
+                <a href="#" class="fas fa-arrow-circle-left" style="font-size: 3em;"></a>
+            </div>
+            <div class="col-xl-9">
+                <h2>Register patient</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+            <div class="col-xl-11">
+                <button class="btn btn-outline-secondary">Create new patient</button>
+            </div>
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+            <div class="col-xl-9">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">18-1000</th>
+                        <td>John Doe</td>
+                        <td>Male</td>
+                        <td>41</td>
+                        <td><a href="#" class="btn btn-outline-secondary">Open details</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">18-1001</th>
+                        <td>Jane Doe</td>
+                        <td>Female</td>
+                        <td>34</td>
+                        <td><a href="#" class="btn btn-outline-secondary">Open details</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">18-1002</th>
+                        <td>Carl Doe</td>
+                        <td>Male</td>
+                        <td>15</td>
+                        <td><a href="#" class="btn btn-outline-secondary">Open details</a></td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+    </wicket:extend>
+</body>
+
+</html>
