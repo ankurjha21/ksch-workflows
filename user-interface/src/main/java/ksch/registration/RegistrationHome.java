@@ -7,8 +7,9 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
+@Deprecated
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-@MountPath("/registration")
+@MountPath("/registration/old")
 public class RegistrationHome extends WebPage {
 
     public RegistrationHome(final PageParameters parameters) {
