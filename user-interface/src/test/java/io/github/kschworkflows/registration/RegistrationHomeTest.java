@@ -1,7 +1,7 @@
 package io.github.kschworkflows.registration;
 
 import io.github.kschworkflows.WebPageTest;
-import ksch.registration.RegistrationHome;
+import ksch.registration.RegistrationDashboard;
 import org.junit.Test;
 
 public class RegistrationHomeTest extends WebPageTest {
@@ -10,8 +10,8 @@ public class RegistrationHomeTest extends WebPageTest {
     public void should_render_registration_landing_page() {
         login("user", "pwd");
 
-        tester.startPage(RegistrationHome.class);
+        tester.startPage(RegistrationDashboard.class);
 
-        tester.assertRenderedPage(RegistrationHome.class);
+        tester.assertRenderedPage(RegistrationDashboard.class);
     }
 }

@@ -26,6 +26,9 @@ subprojects {
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.16.22'
 
+        // TODO Is it possible to declare Lombok dependency only once?
+        testCompile 'org.projectlombok:lombok:1.16.22'
+
         testCompile 'org.mockito:mockito-core:2.18.3'
     }
 }

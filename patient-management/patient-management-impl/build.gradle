@@ -1,0 +1,14 @@
+dependencies {
+    compile project(':patient-management:patient-management-api')
+
+    // TODO Probably we can use the H2 version from Spring Boot
+    implementation('com.h2database:h2:1.4.197')
+
+    // TODO Is it possible to define a variable for the Spring Boot version which can be used in the sub-projects
+    // TODO Apply H2/Spring Boot dependency for all "impl" sub-projects
+    // TODO Unify format of dependeny declaration
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.0.2.RELEASE'
+
+
+    testCompile("org.springframework.boot:spring-boot-starter-test:2.0.2.RELEASE")
+}

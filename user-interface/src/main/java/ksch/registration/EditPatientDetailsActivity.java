@@ -5,11 +5,11 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
-@MountPath("/registration/register-patient")
+@MountPath("/registration/edit-patient")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-public class RegisterPatientActivity extends ApplicationFrame {
+public class EditPatientDetailsActivity extends ApplicationFrame {
 
-    public RegisterPatientActivity(PageParameters pageParameters) {
+    public EditPatientDetailsActivity(PageParameters pageParameters) {
         super(pageParameters);
     }
 }
