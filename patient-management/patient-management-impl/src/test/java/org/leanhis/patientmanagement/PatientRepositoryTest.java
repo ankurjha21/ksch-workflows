@@ -8,7 +8,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -37,7 +36,7 @@ public class PatientRepositoryTest {
     public void should_find_patient_by_id() {
         PatientEntity patient = createTestPatient("KSA-18-1001", "Jane Doe");
 
-        List<PatientEntity> retrievedPatients = patientRepository.findByNameIgnoreCaseContainingOrMedicalRecordNumber("jane", null);
+        List<PatientEntity> retrievedPatients = patientRepository.findByNameOrMedicalRecordNumber("jane");
 
         assertEquals("Could not find patient in database by searching her name", 1, retrievedPatients.size());
     }
