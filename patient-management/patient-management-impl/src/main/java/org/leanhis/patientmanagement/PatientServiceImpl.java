@@ -3,6 +3,7 @@ package org.leanhis.patientmanagement;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
@@ -15,11 +16,11 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.save(PatientEntity.of(patient));
     }
 
+    // TODO Unit test for patient search by name or medical record number
     @Override
-    public List<Patient> find(String name) {
-
-
-
-        return null;
+    public List<Patient> find(String nameOrMedicalRecordNumber) {
+        return patientRepository.findByNameOrMedicalRecordNumber(nameOrMedicalRecordNumber).stream()
+                .map(p -> (Patient) p)
+                .collect(Collectors.toList());
     }
 }

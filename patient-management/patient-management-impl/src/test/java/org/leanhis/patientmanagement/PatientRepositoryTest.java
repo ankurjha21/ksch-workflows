@@ -19,6 +19,8 @@ public class PatientRepositoryTest {
     @Autowired
     private PatientRepository patientRepository;
 
+    // TODO Truncate database after each test case
+
     @Test
     public void should_create_patient() {
         PatientEntity patientEntity = PatientEntity.builder()
@@ -33,7 +35,7 @@ public class PatientRepositoryTest {
     }
 
     @Test
-    public void should_find_patient_by_id() {
+    public void should_find_patient_by_name() {
         PatientEntity patient = createTestPatient("KSA-18-1001", "Jane Doe");
 
         List<PatientEntity> retrievedPatients = patientRepository.findByNameOrMedicalRecordNumber("jane");
@@ -42,8 +44,12 @@ public class PatientRepositoryTest {
     }
 
     @Test
-    public void should_find_patient_by_name() {
+    public void should_find_patient_by_id() {
+        PatientEntity patient = createTestPatient("KSA-19-1002", "Jane Doe");
 
+        List<PatientEntity> retrievedPatients = patientRepository.findByNameOrMedicalRecordNumber("-19-");
+
+        assertEquals("Could not find patient in database by searching her medical record number", 1, retrievedPatients.size());
     }
 
     private PatientEntity createTestPatient(String medicalRecordNumber, String name) {

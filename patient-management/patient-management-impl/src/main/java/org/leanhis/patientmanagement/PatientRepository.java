@@ -9,6 +9,8 @@ import java.util.UUID;
 
 public interface PatientRepository extends CrudRepository<PatientEntity, UUID> {
 
-    @Query("Select p from PatientEntity p where lower(p.name) like lower(concat('%',:nameOrMedicalRecordNumber,'%'))" )
+    @Query("Select p from PatientEntity p where " +
+            "lower(p.name) like lower(concat('%',:nameOrMedicalRecordNumber,'%')) or " +
+            "lower(p.medicalRecordNumber) like lower(concat('%',:nameOrMedicalRecordNumber,'%'))" )
     List<PatientEntity> findByNameOrMedicalRecordNumber(@Param("nameOrMedicalRecordNumber") String nameOrMedicalRecordNumber);
 }
