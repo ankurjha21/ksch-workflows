@@ -51,6 +51,7 @@ public class PatientEntity implements Patient {
 
     public static PatientEntity of(Patient patient) {
         return PatientEntity.builder()
+                .medicalRecordNumber(patient.getMedicalRecordNumber())
                 .name(patient.getName())
                 .dateOfBirth(patient.getDateOfBirth())
                 .gender(patient.getGender())

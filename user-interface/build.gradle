@@ -4,8 +4,8 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-sourceSets.test.resources {
-    srcDir "${project(':user-interface').projectDir}/src/main/webapp"
+sourceSets.main.resources {
+    srcDir "${project(':user-interface').projectDir}/src/main/resources/static"
 }
 
 dependencies {
