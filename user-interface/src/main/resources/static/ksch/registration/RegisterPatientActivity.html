@@ -24,16 +24,14 @@
             <div class="col-xl-1 d-flex">
                 <!-- Placeholder -->
             </div>
-            <div class="col-xl-7">
+            <div class="col-xl-5">
                 <button class="btn btn-outline-secondary">Create new patient</button>
             </div>
-            <div class="col-xl-4">
-                <div class="input-group mb-3">
-                    <form wicket:id="patientSearchForm" class="form-inline">
-                        <input wicket:id="patientSearchTerm" type="text" class="form-control" placeholder="Patient ID or name">
-                        <input class="btn btn-outline-secondary" type="submit" value="submit"/>
-                    </form>
-                </div>
+            <div class="col-xl-6">
+                <form wicket:id="patientSearchForm" class="form-inline float-right">
+                    <input wicket:id="patientSearchTerm" type="text" class="patientSearchTerm form-control" placeholder="Patient ID or name">
+                    <input class="btn btn-outline-secondary" type="submit" value="Search patient"/>
+                </form>
             </div>
         </div>
 

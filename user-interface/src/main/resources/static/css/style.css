@@ -18,3 +18,17 @@ body div.container {
 a.fa, a.fas {
     font-size: 50px;
 }
+
+div.row {
+    margin-bottom: 25px;
+}
+
+
+input.patientSearchTerm {
+    min-width: 250px;
+}
+
+input[type="submit"] {
+    margin-right: 12px;
+    margin-left: 12px;
+}
