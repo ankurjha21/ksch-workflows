@@ -80,8 +80,6 @@ public class RegisterPatientActivity extends ApplicationFrame {
             }
         };
 
-
-
         patientSearchForm.add(new TextField("patientSearchTerm", patientSearchTermModel));
         add(patientSearchForm);
     }
