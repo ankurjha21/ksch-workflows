@@ -26,16 +26,33 @@ public class RegisterPatientActivityTest extends WebPageTest {
     public void should_render_patient_search_result_list() {
         createDummyPatients();
         login("user", "pwd");
-
         tester.startPage(RegisterPatientActivity.class);
-        tester.assertRenderedPage(RegisterPatientActivity.class);
 
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
 
-        // TODO Automatic assertion
         System.out.println(tester.getLastResponseAsString());
+        assertTrue("Table with patients wasn't rendered.",
+                tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
+    }
+
+    @Test
+    public void should_resubmit_patient_search() {
+        createDummyPatients();
+        login("user", "pwd");
+        tester.startPage(RegisterPatientActivity.class);
+        FormTester formTester = tester.newFormTester("patientSearchForm", false);
+        formTester.setValue("patientSearchTerm", "doe");
+        formTester.submit();
+
+        formTester = tester.newFormTester("patientSearchForm", false);
+        formTester.setValue("patientSearchTerm", "doe");
+        formTester.submit();
+
+        System.out.println(tester.getLastResponseAsString());
+        assertTrue("Table with patients wasn't rendered.",
+                tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
     }
 
     @Test
@@ -49,7 +66,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
 
         System.out.println(tester.getLastResponseAsString());
         assertTrue("Notification about missing search results wasn't rendered.",
-                tester.getLastResponseAsString().contains("noSearchResultsMessage"));
+                tester.getLastResponseAsString().contains("Cannot find patient with given Medical Record Number or name"));
         assertFalse("Table with patients was rendered even though there are no patients in the search results",
                 tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
     }
@@ -108,7 +125,6 @@ public class RegisterPatientActivityTest extends WebPageTest {
                 return Gender.FEMALE;
             }
         };
-
 
         patientService.create(patient1);
         patientService.create(patient2);

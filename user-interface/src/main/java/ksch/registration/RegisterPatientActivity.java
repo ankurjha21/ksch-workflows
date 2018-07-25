@@ -18,7 +18,6 @@ import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,13 +36,13 @@ public class RegisterPatientActivity extends ApplicationFrame {
     public RegisterPatientActivity(PageParameters pageParameters) {
         super(pageParameters);
 
-        //WebMarkupContainer patientListContainer = new WebMarkupContainer("patientList");
+        WebMarkupContainer patientListContainer = new WebMarkupContainer("patientList");
         WebMarkupContainer noSearchResultsMessageContainer = new WebMarkupContainer("noSearchResultsMessage");
 
-        //add(patientListContainer);
+        add(patientListContainer);
         add(noSearchResultsMessageContainer);
 
-        //patientListContainer.setVisible(false);
+        patientListContainer.setVisible(false);
         noSearchResultsMessageContainer.setVisible(false);
 
         PropertyModel<String> patientSearchTermModel = new PropertyModel<>(this, "patientSearchTerm");
@@ -54,27 +53,95 @@ public class RegisterPatientActivity extends ApplicationFrame {
             protected void onSubmit() {
                 String patientSearchTerm = patientSearchTermModel.getObject();
 
-                //patientListContainer.setVisible(true);
+                List<Patient> matchingPatients = patientService.findBy(patientSearchTerm);
+
+
+                if (matchingPatients.size() > 0) {
+                    ListView lv = new ListView<Patient>("patients", matchingPatients) {
+                        @Override
+                        protected void populateItem(ListItem<Patient> item) {
+                            Patient patient = item.getModelObject();
+
+                            item.add(new Label("medicalRecordNumber", patient.getMedicalRecordNumber()));
+                            item.add(new Label("name", patient.getName()));
+                            item.add(new Label("gender", patient.getGender().toString().toLowerCase()));
+                            item.add(new Label("age", patientService.getAgeInYears(patient)));
+                        }
+                    };
+
+                    patientListContainer.removeAll(); // required to be able to re-submit search
+                    patientListContainer.add(lv);
+                    patientListContainer.setVisible(true);
+                } else {
+                    noSearchResultsMessageContainer.setVisible(true);
+                }
+
                 patientSearchTermModel.setObject(null);
             }
         };
 
-        List<Patient> matchingPatients = patientService.findBy("Doe");
-        ListView lv = new ListView<Patient>("patients", matchingPatients) {
-            @Override
-            protected void populateItem(ListItem<Patient> item) {
-                Patient patient = item.getModelObject();
 
-                item.add(new Label("medicalRecordNumber", patient.getMedicalRecordNumber()));
-                item.add(new Label("name", patient.getName()));
-                item.add(new Label("gender", patient.getGender().toString().toLowerCase()));
-                item.add(new Label("age", patientService.getAgeInYears(patient)));
-            }
-        };
-
-        add(lv);
 
         patientSearchForm.add(new TextField("patientSearchTerm", patientSearchTermModel));
         add(patientSearchForm);
+    }
+
+    private void createDummyPatients() {
+        Patient patient1 = new Patient() {
+            @Override
+            public UUID getId() {
+                return UUID.randomUUID();
+            }
+
+            @Override
+            public String getMedicalRecordNumber() {
+                return "KSA-18-1001";
+            }
+
+            @Override
+            public String getName() {
+                return "John Doe";
+            }
+
+            @Override
+            public LocalDate getDateOfBirth() {
+                return LocalDate.now().minus(25, YEARS);
+            }
+
+            @Override
+            public Gender getGender() {
+                return Gender.MALE;
+            }
+        };
+
+        Patient patient2 = new Patient() {
+            @Override
+            public UUID getId() {
+                return UUID.randomUUID();
+            }
+
+            @Override
+            public String getMedicalRecordNumber() {
+                return "KSA-18-1002";
+            }
+
+            @Override
+            public String getName() {
+                return "Jane Doe";
+            }
+
+            @Override
+            public LocalDate getDateOfBirth() {
+                return LocalDate.now().minus(20, YEARS);
+            }
+
+            @Override
+            public Gender getGender() {
+                return Gender.FEMALE;
+            }
+        };
+
+        patientService.create(patient1);
+        patientService.create(patient2);
     }
 }
