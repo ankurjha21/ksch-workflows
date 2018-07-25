@@ -37,8 +37,6 @@ public class RegisterPatientActivity extends ApplicationFrame {
     public RegisterPatientActivity(PageParameters pageParameters) {
         super(pageParameters);
 
-        createDummyPatients();
-
         //WebMarkupContainer patientListContainer = new WebMarkupContainer("patientList");
         WebMarkupContainer noSearchResultsMessageContainer = new WebMarkupContainer("noSearchResultsMessage");
 
@@ -78,67 +76,5 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
         patientSearchForm.add(new TextField("patientSearchTerm", patientSearchTermModel));
         add(patientSearchForm);
-    }
-
-    // FIXME Replace dummy data with patient service invocation
-    @Deprecated
-    private void createDummyPatients() {
-        Patient patient1 = new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
-
-            @Override
-            public String getMedicalRecordNumber() {
-                return "KSA-18-1001";
-            }
-
-            @Override
-            public String getName() {
-                return "John Doe";
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now().minus(25, YEARS);
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.MALE;
-            }
-        };
-
-        Patient patient2 = new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
-
-            @Override
-            public String getMedicalRecordNumber() {
-                return "KSA-18-1002";
-            }
-
-            @Override
-            public String getName() {
-                return "Jane Doe";
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now().minus(20, YEARS);
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.FEMALE;
-            }
-        };
-
-
-        patientService.create(patient1);
-        patientService.create(patient2);
     }
 }
