@@ -1,4 +1,4 @@
-package io.github.kschworkflows;
+package ksch;
 
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 import ksch.KschWorkflowsApplication;

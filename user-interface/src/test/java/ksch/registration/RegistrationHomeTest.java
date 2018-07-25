@@ -1,7 +1,6 @@
-package io.github.kschworkflows.registration;
+package ksch.registration;
 
-import io.github.kschworkflows.WebPageTest;
-import ksch.registration.RegistrationDashboard;
+import ksch.WebPageTest;
 import org.junit.Test;
 
 public class RegistrationHomeTest extends WebPageTest {

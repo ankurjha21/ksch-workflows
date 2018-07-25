@@ -1,8 +1,7 @@
-package io.github.kschworkflows.registration;
+package ksch.registration;
 
-import io.github.kschworkflows.WebPageTest;
+import ksch.WebPageTest;
 import ksch.registration.RegisterPatientActivity;
-import ksch.registration.RegistrationDashboard;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Test;
 

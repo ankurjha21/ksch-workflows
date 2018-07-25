@@ -1,6 +1,5 @@
-package io.github.kschworkflows;
+package ksch;
 
-import ksch.Index;
 import org.junit.Test;
 
 public class LoginTest extends WebPageTest {
