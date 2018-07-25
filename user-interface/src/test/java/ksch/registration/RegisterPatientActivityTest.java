@@ -8,7 +8,7 @@ import org.junit.Test;
 public class RegisterPatientActivityTest extends WebPageTest {
 
     @Test
-    public void should_render_registration_landing_page() {
+    public void should_render_patient_search_result_list() {
         login("user", "pwd");
 
         tester.startPage(RegisterPatientActivity.class);
@@ -17,6 +17,11 @@ public class RegisterPatientActivityTest extends WebPageTest {
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.submit();
 
-        System.out.println(tester.getLastRenderedPage().getMarkup());
+        System.out.println(tester.getLastResponseAsString());
+    }
+
+    @Test
+    public void should_render_message_about_no_search_results() {
+
     }
 }

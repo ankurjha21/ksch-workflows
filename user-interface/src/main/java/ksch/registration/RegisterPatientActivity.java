@@ -4,6 +4,7 @@ import ksch.ApplicationFrame;
 import lombok.extern.java.Log;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -38,13 +39,13 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
         createDummyPatients();
 
-        WebMarkupContainer patientListContainer = new WebMarkupContainer("patientList");
+        //WebMarkupContainer patientListContainer = new WebMarkupContainer("patientList");
         WebMarkupContainer noSearchResultsMessageContainer = new WebMarkupContainer("noSearchResultsMessage");
 
-        add(patientListContainer);
+        //add(patientListContainer);
         add(noSearchResultsMessageContainer);
 
-        patientListContainer.setVisible(false);
+        //patientListContainer.setVisible(false);
         noSearchResultsMessageContainer.setVisible(false);
 
         PropertyModel<String> patientSearchTermModel = new PropertyModel<>(this, "patientSearchTerm");
@@ -55,21 +56,25 @@ public class RegisterPatientActivity extends ApplicationFrame {
             protected void onSubmit() {
                 String patientSearchTerm = patientSearchTermModel.getObject();
 
-                patientListContainer.setVisible(true);
-
-
-                List<Patient> matchingPatients = patientService.findBy(patientSearchTerm);
-
-                ListView lv = new ListView("menu", matchingPatients) {
-                    @Override
-                    protected void populateItem(ListItem item) {
-                        Patient patient = (Patient) item.getModelObject();
-                    }
-                };
-
+                //patientListContainer.setVisible(true);
                 patientSearchTermModel.setObject(null);
             }
         };
+
+        List<Patient> matchingPatients = patientService.findBy("Doe");
+        ListView lv = new ListView<Patient>("patients", matchingPatients) {
+            @Override
+            protected void populateItem(ListItem<Patient> item) {
+                Patient patient = item.getModelObject();
+
+                item.add(new Label("medicalRecordNumber", patient.getMedicalRecordNumber()));
+                item.add(new Label("name", patient.getName()));
+                item.add(new Label("gender", patient.getGender().toString().toLowerCase()));
+                item.add(new Label("age", patientService.getAgeInYears(patient)));
+            }
+        };
+
+        add(lv);
 
         patientSearchForm.add(new TextField("patientSearchTerm", patientSearchTermModel));
         add(patientSearchForm);
