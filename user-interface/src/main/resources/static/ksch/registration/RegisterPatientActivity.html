@@ -29,7 +29,7 @@
             </div>
             <div class="col-xl-6">
                 <form wicket:id="patientSearchForm" class="form-inline float-right">
-                    <input wicket:id="patientSearchTerm" type="text" class="patientSearchTerm form-control" placeholder="Patient ID or name">
+                    <input wicket:id="patientSearchTerm" type="text" class="patientSearchTerm form-control" style="min-width: 350px;" placeholder="Medical Record Number or patient name">
                     <input class="btn btn-outline-secondary" type="submit" value="Search patient"/>
                 </form>
             </div>
@@ -43,8 +43,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
+                            <th scope="col" style="width: 15%;">Medical Record Number</th>
+                            <th scope="col" style="width: 30%;">Name</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Age</th>
                             <th scope="col"></th>
@@ -53,27 +53,9 @@
                 <tbody>
                     <tr>
                         <th scope="row">18-1000</th>
-                        <td>John Doe</td>
-                        <td>Male</td>
-                        <td>41</td>
-                        <td class="float-right">
-                            <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">18-1001</th>
-                        <td>Jane Doe</td>
-                        <td>Female</td>
-                        <td>34</td>
-                        <td class="float-right">
-                            <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">18-1002</th>
-                        <td>Carl Doe</td>
-                        <td>Male</td>
-                        <td>15</td>
+                        <td>[name]</td>
+                        <td>[gender]</td>
+                        <td>[age]</td>
                         <td class="float-right">
                             <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
                         </td>
@@ -88,7 +70,7 @@
                 <!-- Placeholder -->
             </div>
             <div class="col-xl-11">
-                Cannot find patient with given patient ID or name.
+                Cannot find patient with given Medical Record Number or name.
             </div>
         </div> <!-- end of no search results message -->
 
