@@ -1,10 +1,15 @@
 package org.leanhis.patientmanagement;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.time.LocalDate.now;
+import static java.time.temporal.ChronoUnit.YEARS;
+
+@Service
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
 
@@ -18,9 +23,14 @@ public class PatientServiceImpl implements PatientService {
 
     // TODO Unit test for patient search by name or medical record number
     @Override
-    public List<Patient> find(String nameOrMedicalRecordNumber) {
+    public List<Patient> findBy(String nameOrMedicalRecordNumber) {
         return patientRepository.findByNameOrMedicalRecordNumber(nameOrMedicalRecordNumber).stream()
                 .map(p -> (Patient) p)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int getAgeInYears(Patient patient) {
+        return (int) patient.getDateOfBirth().until(now(), YEARS);
     }
 }

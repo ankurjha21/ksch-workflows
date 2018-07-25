@@ -26,6 +26,9 @@ subprojects {
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.16.22'
 
+        // TODO Actually Spring Data JPA is only required for the user interface and impl projects.
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.0.2.RELEASE'
+
         // TODO Is it possible to declare Lombok dependency only once?
         testCompile 'org.projectlombok:lombok:1.16.22'
 

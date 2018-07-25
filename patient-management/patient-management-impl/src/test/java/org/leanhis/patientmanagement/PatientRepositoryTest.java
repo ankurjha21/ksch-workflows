@@ -40,7 +40,7 @@ public class PatientRepositoryTest {
 
         List<PatientEntity> retrievedPatients = patientRepository.findByNameOrMedicalRecordNumber("jane");
 
-        assertEquals("Could not find patient in database by searching her name", 1, retrievedPatients.size());
+        assertEquals("Could not findBy patient in database by searching her name", 1, retrievedPatients.size());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class PatientRepositoryTest {
 
         List<PatientEntity> retrievedPatients = patientRepository.findByNameOrMedicalRecordNumber("-19-");
 
-        assertEquals("Could not find patient in database by searching her medical record number", 1, retrievedPatients.size());
+        assertEquals("Could not findBy patient in database by searching her medical record number", 1, retrievedPatients.size());
     }
 
     private PatientEntity createTestPatient(String medicalRecordNumber, String name) {

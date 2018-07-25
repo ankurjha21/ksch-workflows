@@ -6,5 +6,7 @@ public interface PatientService {
 
     Patient create(Patient patient);
 
-    List<Patient> find(String nameOrId);
+    List<Patient> findBy(String nameOrId);
+
+    int getAgeInYears(Patient patient);
 }
