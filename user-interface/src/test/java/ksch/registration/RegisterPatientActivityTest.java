@@ -79,13 +79,16 @@ public class RegisterPatientActivityTest extends WebPageTest {
         formTester.setValue("inputName", "Fritz");
         formTester.select("inputGender", 0);
         formTester.setValue("inputDateOfBirth", "2000-07-27");
+        formTester.setValue("inputAddress", "Kirpal Sagar");
         formTester.submit();
 
         List<Patient> searchResults = patientService.findBy("Fritz");
         assertEquals("Could not create new patient",
                 1, searchResults.size());
-        assertEquals("MALE", searchResults.get(0).getGender().toString());
-        assertEquals(LocalDate.of(2000, 7, 27), searchResults.get(0).getDateOfBirth());
+        Patient retrievedPatient = searchResults.get(0);
+        assertEquals("MALE", retrievedPatient.getGender().toString());
+        assertEquals("Kirpal Sagar", retrievedPatient.getAddress());
+        assertEquals(LocalDate.of(2000, 7, 27), retrievedPatient.getDateOfBirth());
     }
 
     private void createDummyPatients() {

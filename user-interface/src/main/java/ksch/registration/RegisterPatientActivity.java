@@ -10,13 +10,12 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.leanhis.patientmanagement.Gender;
-import org.leanhis.patientmanagement.PatientResource;
 import org.leanhis.patientmanagement.Patient;
+import org.leanhis.patientmanagement.PatientResource;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -77,7 +76,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
                             item.add(new Label("medicalRecordNumber", patient.getMedicalRecordNumber()));
                             item.add(new Label("name", patient.getName()));
                             item.add(new Label("gender", patient.getGender()));
-                            item.add(new Label("age", 15));
+                            item.add(new Label("age", patientService.getAgeInYears(patient)));
                         }
                     };
 
@@ -85,6 +84,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
                     patientListContainer.add(lv);
                     patientListContainer.setVisible(true);
                 } else {
+                    patientListContainer.setVisible(false);
                     noSearchResultsMessageContainer.setVisible(true);
                 }
 
@@ -99,6 +99,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
     private Form buildCreatePatientForm() {
         PropertyModel<String> inputNameModel = new PropertyModel<>(addPatientFormProperties, "inputName");
+        PropertyModel<String> inputAddressModel = new PropertyModel<>(addPatientFormProperties, "inputAddress");
         PropertyModel<String> inputDateOfBirthModel = new PropertyModel<>(addPatientFormProperties, "inputDateOfBirth");
         PropertyModel<String> inputGenderModel = new PropertyModel<>(addPatientFormProperties, "inputGender");
         List<String> inputGenderOptions = new ArrayList<>();
@@ -112,6 +113,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
             protected void onSubmit() {
                 PatientResource patient = PatientResource.builder()
                         .name(getAndResetObject(inputNameModel))
+                        .address(getAndResetObject(inputAddressModel))
                         .gender(Gender.valueOf(getAndResetObject(inputGenderModel).toUpperCase()))
                         .dateOfBirth(LocalDate.parse(getAndResetObject(inputDateOfBirthModel)))
                         .build();
@@ -121,6 +123,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
         };
 
         addPatientForm.add(new TextField("inputName", inputNameModel));
+        addPatientForm.add(new TextField("inputAddress", inputAddressModel));
         addPatientForm.add(new TextField("inputDateOfBirth", inputDateOfBirthModel));
         addPatientForm.add(new DropDownChoice<>("inputGender", inputGenderModel, inputGenderOptions));
 
@@ -138,4 +141,5 @@ class AddPatientFormProperties {
     private String inputName;
     private String inputGender;
     private String inputDateOfBirth;
+    private String inputAddress;
 }
