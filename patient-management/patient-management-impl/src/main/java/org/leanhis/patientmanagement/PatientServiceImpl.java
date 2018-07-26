@@ -30,7 +30,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public int getAgeInYears(Patient patient) {
+    public Integer getAgeInYears(Patient patient) {
+        if (patient.getDateOfBirth() == null) {
+            return null;
+        }
+
         return (int) patient.getDateOfBirth().until(now(), YEARS);
     }
 }

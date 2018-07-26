@@ -28,20 +28,22 @@ import java.util.List;
 @Log
 public class RegisterPatientActivity extends ApplicationFrame {
 
+    private WebMarkupContainer patientListContainer;
+
+    private WebMarkupContainer noSearchResultsMessageContainer;
+
     @SpringBean
     private PatientService patientService;
 
     private String patientSearchTerm = null;
 
-    private String inputName = null;
-
-    private String inputGender = null;
+    private AddPatientFormProperties addPatientFormProperties = new AddPatientFormProperties();
 
     public RegisterPatientActivity(PageParameters pageParameters) {
         super(pageParameters);
 
-        WebMarkupContainer patientListContainer = new WebMarkupContainer("patientList");
-        WebMarkupContainer noSearchResultsMessageContainer = new WebMarkupContainer("noSearchResultsMessage");
+        patientListContainer = new WebMarkupContainer("patientList");
+        noSearchResultsMessageContainer = new WebMarkupContainer("noSearchResultsMessage");
 
         add(patientListContainer);
         add(noSearchResultsMessageContainer);
@@ -49,6 +51,11 @@ public class RegisterPatientActivity extends ApplicationFrame {
         patientListContainer.setVisible(false);
         noSearchResultsMessageContainer.setVisible(false);
 
+        add(buildSearchPatientForm());
+        add(buildCreatePatientForm());
+    }
+
+    private Form buildSearchPatientForm() {
         PropertyModel<String> patientSearchTermModel = new PropertyModel<>(this, "patientSearchTerm");
 
         Form<?> patientSearchForm = new Form<Void>("patientSearchForm") {
@@ -68,7 +75,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
                             item.add(new Label("medicalRecordNumber", patient.getMedicalRecordNumber()));
                             item.add(new Label("name", patient.getName()));
-                            item.add(new Label("gender", "not implemented yet"));
+                            item.add(new Label("gender", patient.getGender()));
                             item.add(new Label("age", 15));
                         }
                     };
@@ -85,14 +92,13 @@ public class RegisterPatientActivity extends ApplicationFrame {
         };
 
         patientSearchForm.add(new TextField("patientSearchTerm", patientSearchTermModel));
-        add(patientSearchForm);
 
-        add(buildCreatePatientForm());
+        return patientSearchForm;
     }
 
     private Form buildCreatePatientForm() {
-        PropertyModel<String> inputNameModel = new PropertyModel<>(this, "inputName");
-        PropertyModel<String> inputGenderModel = new PropertyModel<>(this, "inputGender");
+        PropertyModel<String> inputNameModel = new PropertyModel<>(addPatientFormProperties, "inputName");
+        PropertyModel<String> inputGenderModel = new PropertyModel<>(addPatientFormProperties, "inputGender");
         List<String> inputGenderOptions = new ArrayList<>();
         inputGenderOptions.add("Male");
         inputGenderOptions.add("Female");
@@ -122,4 +128,9 @@ public class RegisterPatientActivity extends ApplicationFrame {
         propertyModel.setObject(null);
         return object;
     }
+}
+
+class AddPatientFormProperties {
+    private String inputName;
+    private String inputGender;
 }

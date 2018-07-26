@@ -8,5 +8,5 @@ public interface PatientService {
 
     List<Patient> findBy(String nameOrId);
 
-    int getAgeInYears(Patient patient);
+    Integer getAgeInYears(Patient patient);
 }
