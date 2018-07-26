@@ -19,7 +19,6 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-xl-1 d-flex">
                 <!-- Placeholder -->
@@ -43,25 +42,27 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <div class="form-group">
-                                <label for="inputName">Name</label>
-                                <input type="text" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputDateOfBirth">Date of birth</label>
-                                <input type="text" class="form-control" id="inputDateOfBirth" placeholder="dd/mm/yyyy">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputGender">Gender</label>
-                                <select class="form-control" id="inputGender">
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress">Address</label>
-                                <input type="email" class="form-control" id="inputAddress" placeholder="Name">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="inputName">Name</label>
+                                    <input wicket:id="inputName" type="text" class="form-control" id="inputName" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDateOfBirth">Date of birth</label>
+                                    <input wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth" placeholder="yyyy-mm-dd">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputGender">Gender</label>
+                                    <select wicket:id="inputGender" class="form-control" id="inputGender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress">Address</label>
+                                    <input wicket:id="inputAddress" type="text" class="form-control" id="inputAddress" placeholder="Name">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>

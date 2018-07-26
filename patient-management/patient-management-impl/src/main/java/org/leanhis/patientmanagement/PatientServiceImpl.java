@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static java.time.LocalDate.now;
@@ -27,6 +28,11 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByIdOrName(nameOrMedicalRecordNumber).stream()
                 .map(p -> (Patient) p)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Patient getById(UUID patientId) {
+        return patientRepository.getById(patientId);
     }
 
     @Override

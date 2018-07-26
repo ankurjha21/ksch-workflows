@@ -15,4 +15,6 @@ public interface PatientRepository extends CrudRepository<PatientEntity, UUID> {
             "lower(p.name) like lower(concat('%',:patientIdOrName,'%')) or " +
             "lower(p.patientNumber) like lower(concat('%',:patientIdOrName,'%'))" )
     List<PatientEntity> findByIdOrName(@Param("patientIdOrName") String patientIdOrName);
+
+    Patient getById(UUID patientId);
 }

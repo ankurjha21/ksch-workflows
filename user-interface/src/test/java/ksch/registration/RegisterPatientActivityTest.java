@@ -34,7 +34,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
 
         System.out.println(tester.getLastResponseAsString());
         assertTrue("Table with patients wasn't rendered.",
-                tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
+                tester.getLastResponseAsString().contains("<th scope=\"col\">ID</th>"));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
 
         System.out.println(tester.getLastResponseAsString());
         assertTrue("Table with patients wasn't rendered.",
-                tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
+                tester.getLastResponseAsString().contains("<th scope=\"col\">ID</th>"));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
 
         System.out.println(tester.getLastResponseAsString());
         assertTrue("Notification about missing search results wasn't rendered.",
-                tester.getLastResponseAsString().contains("Cannot find patient with given Medical Record Number or name"));
+                tester.getLastResponseAsString().contains("Cannot find patient with given ID or name"));
         assertFalse("Table with patients was rendered even though there are no patients in the search results",
                 tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
     }

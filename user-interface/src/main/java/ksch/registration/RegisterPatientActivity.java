@@ -84,7 +84,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
                     patientListContainer.add(lv);
                     patientListContainer.setVisible(true);
                 } else {
-                    patientListContainer.setVisible(false);
+                    //patientListContainer.setVisible(false);
                     noSearchResultsMessageContainer.setVisible(true);
                 }
 
