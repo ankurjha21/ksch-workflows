@@ -5,18 +5,22 @@ import lombok.extern.java.Log;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.PatientResource;
 import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @MountPath("/registration/register-patient")
@@ -30,6 +34,8 @@ public class RegisterPatientActivity extends ApplicationFrame {
     private String patientSearchTerm = null;
 
     private String inputName = null;
+
+    private String inputGender = null;
 
     public RegisterPatientActivity(PageParameters pageParameters) {
         super(pageParameters);
@@ -62,8 +68,8 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
                             item.add(new Label("medicalRecordNumber", patient.getMedicalRecordNumber()));
                             item.add(new Label("name", patient.getName()));
-                            item.add(new Label("gender", patient.getGender().toString().toLowerCase()));
-                            item.add(new Label("age", patientService.getAgeInYears(patient)));
+                            item.add(new Label("gender", "not implemented yet"));
+                            item.add(new Label("age", 15));
                         }
                     };
 
@@ -86,12 +92,19 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
     private Form buildCreatePatientForm() {
         PropertyModel<String> inputNameModel = new PropertyModel<>(this, "inputName");
+        PropertyModel<String> inputGenderModel = new PropertyModel<>(this, "inputGender");
+        List<String> inputGenderOptions = new ArrayList<>();
+        inputGenderOptions.add("Male");
+        inputGenderOptions.add("Female");
+        inputGenderOptions.add("Other");
+
 
         Form<Void> addPatientForm = new Form<Void>("addPatientForm") {
             @Override
             protected void onSubmit() {
                 PatientResource patient = PatientResource.builder()
-                        .name(inputNameModel.getObject())
+                        .name(getAndResetObject(inputNameModel))
+                        .gender(Gender.valueOf(getAndResetObject(inputGenderModel).toUpperCase()))
                         .build();
 
                 patientService.create(patient);
@@ -99,7 +112,14 @@ public class RegisterPatientActivity extends ApplicationFrame {
         };
 
         addPatientForm.add(new TextField("inputName", inputNameModel));
+        addPatientForm.add(new DropDownChoice<>("inputGender", inputGenderModel, inputGenderOptions));
 
         return addPatientForm;
+    }
+
+    private String getAndResetObject(PropertyModel<String> propertyModel) {
+        String object = propertyModel.getObject();
+        propertyModel.setObject(null);
+        return object;
     }
 }

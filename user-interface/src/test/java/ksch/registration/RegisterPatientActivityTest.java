@@ -9,6 +9,7 @@ import org.leanhis.patientmanagement.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.YEARS;
@@ -76,10 +77,13 @@ public class RegisterPatientActivityTest extends WebPageTest {
 
         FormTester formTester = tester.newFormTester("addPatientForm", false);
         formTester.setValue("inputName", "Fritz");
+        formTester.select("inputGender", 0);
         formTester.submit();
 
+        List<Patient> searchResults = patientService.findBy("Fritz");
         assertEquals("Could not create new patient",
-                1, patientService.findBy("Fritz").size());
+                1, searchResults.size());
+        assertEquals("MALE", searchResults.get(0).getGender().toString());
     }
 
     private void createDummyPatients() {
