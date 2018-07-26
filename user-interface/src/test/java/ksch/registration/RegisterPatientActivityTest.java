@@ -2,6 +2,7 @@ package ksch.registration;
 
 import ksch.WebPageTest;
 import org.apache.wicket.util.tester.FormTester;
+import org.junit.Assert;
 import org.junit.Test;
 import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
@@ -42,15 +43,12 @@ public class RegisterPatientActivityTest extends WebPageTest {
         createDummyPatients();
         login("user", "pwd");
         tester.startPage(RegisterPatientActivity.class);
+
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
 
-        System.out.println(tester.getLastResponseAsString());
-
-        tester.clickLink("patientList:patients:0:openPatientDetails");
-
-        tester.assertRenderedPage(EditPatientDetailsActivity.class);
+        assertTrue(tester.getLastResponseAsString().contains("/edit-patient?id="));
     }
 
     @Test
@@ -66,7 +64,6 @@ public class RegisterPatientActivityTest extends WebPageTest {
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
 
-        System.out.println(tester.getLastResponseAsString());
         assertTrue("Table with patients wasn't rendered.",
                 tester.getLastResponseAsString().contains("<th scope=\"col\">ID</th>"));
     }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@MountPath("/registration/edit-patient/{id}")
+@MountPath("/edit-patient")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
 public class EditPatientDetailsActivity extends ApplicationFrame {
 

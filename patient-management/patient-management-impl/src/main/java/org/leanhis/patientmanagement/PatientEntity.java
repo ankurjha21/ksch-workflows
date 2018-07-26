@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = PRIVATE)
-public class PatientEntity implements Patient {
+public class PatientEntity implements Patient, Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")

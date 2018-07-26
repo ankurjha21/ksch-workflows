@@ -20,6 +20,7 @@ import org.leanhis.patientmanagement.PatientResource;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
                             item.add(new Label("gender", patient.getGender()));
                             item.add(new Label("age", patientService.getAgeInYears(patient)));
 
-                            item.add(new ExternalLink("openPatientDetails", "/registration/edit-patient/" + patient.getId()));
+                            item.add(new ExternalLink("openPatientDetails", "/edit-patient?id=" + patient.getId()));
                         }
                     };
 
@@ -139,7 +140,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
     }
 }
 
-class AddPatientFormProperties {
+class AddPatientFormProperties implements Serializable {
     private String inputName;
     private String inputGender;
     private String inputDateOfBirth;
