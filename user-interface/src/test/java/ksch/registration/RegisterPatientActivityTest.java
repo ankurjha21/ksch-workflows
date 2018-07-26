@@ -38,6 +38,22 @@ public class RegisterPatientActivityTest extends WebPageTest {
     }
 
     @Test
+    public void should_open_patient_details() {
+        createDummyPatients();
+        login("user", "pwd");
+        tester.startPage(RegisterPatientActivity.class);
+        FormTester formTester = tester.newFormTester("patientSearchForm", false);
+        formTester.setValue("patientSearchTerm", "doe");
+        formTester.submit();
+
+        System.out.println(tester.getLastResponseAsString());
+
+        tester.clickLink("patientList:patients:0:openPatientDetails");
+
+        tester.assertRenderedPage(EditPatientDetailsActivity.class);
+    }
+
+    @Test
     public void should_resubmit_patient_search() {
         createDummyPatients();
         login("user", "pwd");

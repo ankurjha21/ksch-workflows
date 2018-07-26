@@ -57,12 +57,12 @@
                     </thead>
                 <tbody>
                     <tr wicket:id="patients">
-                        <th wicket:id="medicalRecordNumber" scope="row">[patient id]</th>
+                        <th wicket:id="patientNumber" scope="row">[patient id]</th>
                         <td wicket:id="name">[name]</td>
                         <td wicket:id="gender">[gender]</td>
                         <td wicket:id="age">[age]</td>
                         <td class="float-right">
-                            <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                            <a wicket:id="openPatientDetails" href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
                         </td>
                     </tr>
                 </tbody>

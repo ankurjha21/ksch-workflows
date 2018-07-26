@@ -10,7 +10,6 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
-import org.leanhis.patientmanagement.PatientResource;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 

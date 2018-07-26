@@ -8,6 +8,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.PropertyModel;
@@ -66,17 +67,18 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
                 List<Patient> matchingPatients = patientService.findBy(patientSearchTerm);
 
-
                 if (matchingPatients.size() > 0) {
                     ListView lv = new ListView<Patient>("patients", matchingPatients) {
                         @Override
                         protected void populateItem(ListItem<Patient> item) {
                             Patient patient = item.getModelObject();
 
-                            item.add(new Label("medicalRecordNumber", patient.getPatientNumber()));
+                            item.add(new Label("patientNumber", patient.getPatientNumber()));
                             item.add(new Label("name", patient.getName()));
                             item.add(new Label("gender", patient.getGender()));
                             item.add(new Label("age", patientService.getAgeInYears(patient)));
+
+                            item.add(new ExternalLink("openPatientDetails", "/registration/edit-patient/" + patient.getId()));
                         }
                     };
 
@@ -107,7 +109,6 @@ public class RegisterPatientActivity extends ApplicationFrame {
         inputGenderOptions.add("Male");
         inputGenderOptions.add("Female");
         inputGenderOptions.add("Other");
-
 
         Form<Void> addPatientForm = new Form<Void>("addPatientForm") {
             @Override
