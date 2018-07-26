@@ -49,12 +49,16 @@ public class PatientEntity implements Patient {
     @Column(name = "gender")
     private Gender gender;
 
+    @Column(name = "address")
+    private String address;
+
     public static PatientEntity of(Patient patient) {
         return PatientEntity.builder()
                 .medicalRecordNumber(patient.getMedicalRecordNumber())
                 .name(patient.getName())
                 .dateOfBirth(patient.getDateOfBirth())
                 .gender(patient.getGender())
+                .address(patient.getAddress())
                 .build();
     }
 }

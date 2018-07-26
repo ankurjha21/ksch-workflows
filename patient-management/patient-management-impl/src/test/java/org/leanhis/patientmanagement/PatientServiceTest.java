@@ -52,6 +52,11 @@ public class PatientServiceTest {
             public Gender getGender() {
                 return Gender.MALE;
             }
+
+            @Override
+            public String getAddress() {
+                return "Kirpal Sagar";
+            }
         };
     }
 }

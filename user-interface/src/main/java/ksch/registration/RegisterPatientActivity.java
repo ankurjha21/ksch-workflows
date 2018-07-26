@@ -20,6 +20,7 @@ import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,6 +99,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
     private Form buildCreatePatientForm() {
         PropertyModel<String> inputNameModel = new PropertyModel<>(addPatientFormProperties, "inputName");
+        PropertyModel<String> inputDateOfBirthModel = new PropertyModel<>(addPatientFormProperties, "inputDateOfBirth");
         PropertyModel<String> inputGenderModel = new PropertyModel<>(addPatientFormProperties, "inputGender");
         List<String> inputGenderOptions = new ArrayList<>();
         inputGenderOptions.add("Male");
@@ -111,6 +113,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
                 PatientResource patient = PatientResource.builder()
                         .name(getAndResetObject(inputNameModel))
                         .gender(Gender.valueOf(getAndResetObject(inputGenderModel).toUpperCase()))
+                        .dateOfBirth(LocalDate.parse(getAndResetObject(inputDateOfBirthModel)))
                         .build();
 
                 patientService.create(patient);
@@ -118,6 +121,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
         };
 
         addPatientForm.add(new TextField("inputName", inputNameModel));
+        addPatientForm.add(new TextField("inputDateOfBirth", inputDateOfBirthModel));
         addPatientForm.add(new DropDownChoice<>("inputGender", inputGenderModel, inputGenderOptions));
 
         return addPatientForm;
@@ -133,4 +137,5 @@ public class RegisterPatientActivity extends ApplicationFrame {
 class AddPatientFormProperties {
     private String inputName;
     private String inputGender;
+    private String inputDateOfBirth;
 }

@@ -78,12 +78,14 @@ public class RegisterPatientActivityTest extends WebPageTest {
         FormTester formTester = tester.newFormTester("addPatientForm", false);
         formTester.setValue("inputName", "Fritz");
         formTester.select("inputGender", 0);
+        formTester.setValue("inputDateOfBirth", "2000-07-27");
         formTester.submit();
 
         List<Patient> searchResults = patientService.findBy("Fritz");
         assertEquals("Could not create new patient",
                 1, searchResults.size());
         assertEquals("MALE", searchResults.get(0).getGender().toString());
+        assertEquals(LocalDate.of(2000, 7, 27), searchResults.get(0).getDateOfBirth());
     }
 
     private void createDummyPatients() {
@@ -112,6 +114,11 @@ public class RegisterPatientActivityTest extends WebPageTest {
             public Gender getGender() {
                 return Gender.MALE;
             }
+
+            @Override
+            public String getAddress() {
+                return "Kirpal Sagar";
+            }
         };
 
         Patient patient2 = new Patient() {
@@ -138,6 +145,11 @@ public class RegisterPatientActivityTest extends WebPageTest {
             @Override
             public Gender getGender() {
                 return Gender.FEMALE;
+            }
+
+            @Override
+            public String getAddress() {
+                return "Kirpal Sagar";
             }
         };
 

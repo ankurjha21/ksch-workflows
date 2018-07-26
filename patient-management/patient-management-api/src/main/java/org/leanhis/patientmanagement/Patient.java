@@ -17,4 +17,6 @@ public interface Patient {
     LocalDate getDateOfBirth();
 
     Gender getGender();
+
+    String getAddress();
 }

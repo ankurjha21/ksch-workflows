@@ -19,4 +19,6 @@ public class PatientResource implements Patient {
     private LocalDate dateOfBirth;
 
     private Gender gender;
+
+    private String address;
 }
