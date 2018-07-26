@@ -3,8 +3,11 @@ package org.leanhis.patientmanagement;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
+import javax.management.RuntimeMBeanException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -22,12 +25,16 @@ public class PatientEntityTest {
 
     @SneakyThrows
     private void assertAllAttributesEqual(Patient patient, PatientEntity patientEntity) {
-        for (Method m : Patient.class.getDeclaredMethods()) {
-            Object valuePatient = m.invoke(patient);
-            Object valuePatientEnity = m.invoke(patientEntity);
+        Arrays.stream(Patient.class.getDeclaredMethods()).filter(m -> m.getName().startsWith("get") || m.getName().startsWith("is")).forEach(m -> {
+            try {
+                Object valuePatient = m.invoke(patient);
+                Object valuePatientEnity = m.invoke(patientEntity);
 
-            assertEquals(m.getName() + "() was not initialized in the PatientEntity", valuePatient, valuePatientEnity);
-        }
+                assertEquals(m.getName() + "() was not initialized in the PatientEntity", valuePatient, valuePatientEnity);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private Patient buildTestPatient() {
@@ -38,8 +45,18 @@ public class PatientEntityTest {
             }
 
             @Override
+            public void setId(UUID id) {
+
+            }
+
+            @Override
             public String getPatientNumber() {
                 return "KSA-18-1001";
+            }
+
+            @Override
+            public void setPatientNumber(String patientNumber) {
+
             }
 
             @Override
@@ -48,8 +65,18 @@ public class PatientEntityTest {
             }
 
             @Override
+            public void setName(String name) {
+
+            }
+
+            @Override
             public LocalDate getDateOfBirth() {
                 return LocalDate.now();
+            }
+
+            @Override
+            public void setDateOfBirth(LocalDate dateOfBirth) {
+
             }
 
             @Override
@@ -58,8 +85,18 @@ public class PatientEntityTest {
             }
 
             @Override
+            public void setGender(Gender gender) {
+
+            }
+
+            @Override
             public String getAddress() {
                 return "Kirpal Sagar";
+            }
+
+            @Override
+            public void setAddress(String address) {
+
             }
         };
     }

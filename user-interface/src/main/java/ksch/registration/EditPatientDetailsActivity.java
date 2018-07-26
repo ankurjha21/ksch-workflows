@@ -35,49 +35,41 @@ public class EditPatientDetailsActivity extends ApplicationFrame {
 
         Patient patient = patientService.getById(patientID);
 
-
-
-
-
-
+        add(buildUpdatePatientForm(patient));
     }
 
-    private Form buildUpdatePatientForm() {
+    private Form buildUpdatePatientForm(Patient patient) {
         PropertyModel<String> inputNameModel = new PropertyModel<>(updatePatientForm, "inputName");
         PropertyModel<String> inputAddressModel = new PropertyModel<>(updatePatientForm, "inputAddress");
         PropertyModel<String> inputDateOfBirthModel = new PropertyModel<>(updatePatientForm, "inputDateOfBirth");
         PropertyModel<String> inputGenderModel = new PropertyModel<>(updatePatientForm, "inputGender");
         List<String> inputGenderOptions = new ArrayList<>();
-        inputGenderOptions.add("Male");
-        inputGenderOptions.add("Female");
-        inputGenderOptions.add("Other");
+        inputGenderOptions.add("MALE");
+        inputGenderOptions.add("FEMALE");
+        inputGenderOptions.add("OTHER");
 
+        updatePatientForm.setInputName(patient.getName());
+        updatePatientForm.setInputGender(patient.getGender().toString());
+        updatePatientForm.setInputDateOfBirth(patient.getDateOfBirth().toString());
+        updatePatientForm.setInputAddress(patient.getAddress());
 
-        Form<Void> addPatientForm = new Form<Void>("addPatientForm") {
+        Form<Void> form = new Form<Void>("updatePatientForm") {
             @Override
             protected void onSubmit() {
-                PatientResource patient = PatientResource.builder()
-                        .name(getAndResetObject(inputNameModel))
-                        .address(getAndResetObject(inputAddressModel))
-                        .gender(Gender.valueOf(getAndResetObject(inputGenderModel).toUpperCase()))
-                        .dateOfBirth(LocalDate.parse(getAndResetObject(inputDateOfBirthModel)))
-                        .build();
+                patient.setName(inputNameModel.getObject());
+                patient.setAddress(inputAddressModel.getObject());
+                patient.setGender(Gender.valueOf(inputGenderModel.getObject()));
+                patient.setDateOfBirth(LocalDate.parse(inputDateOfBirthModel.getObject()));
 
-                patientService.create(patient);
+                patientService.update(patient);
             }
         };
 
-        addPatientForm.add(new TextField("inputName", inputNameModel));
-        addPatientForm.add(new TextField("inputAddress", inputAddressModel));
-        addPatientForm.add(new TextField("inputDateOfBirth", inputDateOfBirthModel));
-        addPatientForm.add(new DropDownChoice<>("inputGender", inputGenderModel, inputGenderOptions));
+        form.add(new TextField("inputName", inputNameModel));
+        form.add(new TextField("inputAddress", inputAddressModel));
+        form.add(new TextField("inputDateOfBirth", inputDateOfBirthModel));
+        form.add(new DropDownChoice<>("inputGender", inputGenderModel, inputGenderOptions));
 
-        return addPatientForm;
-    }
-
-    private String getAndResetObject(PropertyModel<String> propertyModel) {
-        String object = propertyModel.getObject();
-        propertyModel.setObject(null);
-        return object;
+        return form;
     }
 }

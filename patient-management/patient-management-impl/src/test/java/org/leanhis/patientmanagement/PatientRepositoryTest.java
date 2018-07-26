@@ -32,7 +32,6 @@ public class PatientRepositoryTest {
         PatientEntity createdPatient = patientRepository.save(patientEntity);
 
         assertNotNull(createdPatient.getId());
-        assertNotNull(createdPatient.getPatientNumber());
     }
 
     @Test

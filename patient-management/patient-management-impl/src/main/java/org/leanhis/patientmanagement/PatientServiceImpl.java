@@ -43,4 +43,9 @@ public class PatientServiceImpl implements PatientService {
 
         return (int) patient.getDateOfBirth().until(now(), YEARS);
     }
+
+    @Override
+    public void update(Patient patient) {
+        patientRepository.save(PatientEntity.of(patient));
+    }
 }

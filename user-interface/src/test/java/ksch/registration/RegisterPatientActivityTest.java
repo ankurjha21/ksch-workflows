@@ -99,8 +99,18 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
+            public void setId(UUID id) {
+
+            }
+
+            @Override
             public String getPatientNumber() {
                 return "KSA-18-1001";
+            }
+
+            @Override
+            public void setPatientNumber(String patientNumber) {
+
             }
 
             @Override
@@ -109,8 +119,18 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
+            public void setName(String name) {
+
+            }
+
+            @Override
             public LocalDate getDateOfBirth() {
                 return LocalDate.now().minus(25, YEARS);
+            }
+
+            @Override
+            public void setDateOfBirth(LocalDate dateOfBirth) {
+
             }
 
             @Override
@@ -119,8 +139,18 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
+            public void setGender(Gender gender) {
+
+            }
+
+            @Override
             public String getAddress() {
                 return "Kirpal Sagar";
+            }
+
+            @Override
+            public void setAddress(String address) {
+
             }
         };
 
@@ -131,8 +161,18 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
+            public void setId(UUID id) {
+
+            }
+
+            @Override
             public String getPatientNumber() {
                 return "KSA-18-1002";
+            }
+
+            @Override
+            public void setPatientNumber(String patientNumber) {
+
             }
 
             @Override
@@ -141,8 +181,18 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
+            public void setName(String name) {
+
+            }
+
+            @Override
             public LocalDate getDateOfBirth() {
                 return LocalDate.now().minus(20, YEARS);
+            }
+
+            @Override
+            public void setDateOfBirth(LocalDate dateOfBirth) {
+
             }
 
             @Override
@@ -151,8 +201,18 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
+            public void setGender(Gender gender) {
+
+            }
+
+            @Override
             public String getAddress() {
                 return "Kirpal Sagar";
+            }
+
+            @Override
+            public void setAddress(String address) {
+
             }
         };
 

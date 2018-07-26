@@ -80,11 +80,12 @@ public class RegisterPatientActivity extends ApplicationFrame {
                         }
                     };
 
+                    noSearchResultsMessageContainer.setVisible(false);
                     patientListContainer.removeAll(); // required to be able to re-submit search
                     patientListContainer.add(lv);
                     patientListContainer.setVisible(true);
                 } else {
-                    //patientListContainer.setVisible(false);
+                    patientListContainer.setVisible(false);
                     noSearchResultsMessageContainer.setVisible(true);
                 }
 

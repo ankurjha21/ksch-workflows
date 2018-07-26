@@ -12,4 +12,6 @@ public interface PatientService {
     Patient getById(UUID patientId);
 
     Integer getAgeInYears(Patient patient);
+
+    void update(Patient patient);
 }

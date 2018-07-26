@@ -34,8 +34,18 @@ public class PatientServiceTest {
             }
 
             @Override
+            public void setId(UUID id) {
+
+            }
+
+            @Override
             public String getPatientNumber() {
                 return "KSA-18-1005";
+            }
+
+            @Override
+            public void setPatientNumber(String patientNumber) {
+
             }
 
             @Override
@@ -44,8 +54,18 @@ public class PatientServiceTest {
             }
 
             @Override
+            public void setName(String name) {
+
+            }
+
+            @Override
             public LocalDate getDateOfBirth() {
                 return dateOfBirth;
+            }
+
+            @Override
+            public void setDateOfBirth(LocalDate dateOfBirth) {
+
             }
 
             @Override
@@ -54,8 +74,18 @@ public class PatientServiceTest {
             }
 
             @Override
+            public void setGender(Gender gender) {
+
+            }
+
+            @Override
             public String getAddress() {
                 return "Kirpal Sagar";
+            }
+
+            @Override
+            public void setAddress(String address) {
+
             }
         };
     }
