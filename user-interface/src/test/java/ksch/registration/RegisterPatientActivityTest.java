@@ -1,9 +1,7 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
-import ksch.registration.RegisterPatientActivity;
 import org.apache.wicket.util.tester.FormTester;
-import org.junit.Assert;
 import org.junit.Test;
 import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
@@ -14,6 +12,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.YEARS;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -59,7 +58,6 @@ public class RegisterPatientActivityTest extends WebPageTest {
     public void should_render_message_about_no_search_results() {
         login("user", "pwd");
         tester.startPage(RegisterPatientActivity.class);
-        tester.assertRenderedPage(RegisterPatientActivity.class);
 
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.submit();
@@ -69,6 +67,19 @@ public class RegisterPatientActivityTest extends WebPageTest {
                 tester.getLastResponseAsString().contains("Cannot find patient with given Medical Record Number or name"));
         assertFalse("Table with patients was rendered even though there are no patients in the search results",
                 tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
+    }
+
+    @Test
+    public void should_add_new_patient() {
+        login("user", "pwd");
+        tester.startPage(RegisterPatientActivity.class);
+
+        FormTester formTester = tester.newFormTester("addPatientForm", false);
+        formTester.setValue("inputName", "Fritz");
+        formTester.submit();
+
+        assertEquals("Could not create new patient",
+                1, patientService.findBy("Fritz").size());
     }
 
     private void createDummyPatients() {

@@ -12,16 +12,12 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.leanhis.patientmanagement.Gender;
+import org.leanhis.patientmanagement.PatientResource;
 import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
-
-import static java.time.temporal.ChronoUnit.YEARS;
 
 @MountPath("/registration/register-patient")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
@@ -32,6 +28,8 @@ public class RegisterPatientActivity extends ApplicationFrame {
     private PatientService patientService;
 
     private String patientSearchTerm = null;
+
+    private String inputName = null;
 
     public RegisterPatientActivity(PageParameters pageParameters) {
         super(pageParameters);
@@ -82,64 +80,26 @@ public class RegisterPatientActivity extends ApplicationFrame {
 
         patientSearchForm.add(new TextField("patientSearchTerm", patientSearchTermModel));
         add(patientSearchForm);
+
+        add(buildCreatePatientForm());
     }
 
-    private void createDummyPatients() {
-        Patient patient1 = new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
+    private Form buildCreatePatientForm() {
+        PropertyModel<String> inputNameModel = new PropertyModel<>(this, "inputName");
 
+        Form<Void> addPatientForm = new Form<Void>("addPatientForm") {
             @Override
-            public String getMedicalRecordNumber() {
-                return "KSA-18-1001";
-            }
+            protected void onSubmit() {
+                PatientResource patient = PatientResource.builder()
+                        .name(inputNameModel.getObject())
+                        .build();
 
-            @Override
-            public String getName() {
-                return "John Doe";
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now().minus(25, YEARS);
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.MALE;
+                patientService.create(patient);
             }
         };
 
-        Patient patient2 = new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
+        addPatientForm.add(new TextField("inputName", inputNameModel));
 
-            @Override
-            public String getMedicalRecordNumber() {
-                return "KSA-18-1002";
-            }
-
-            @Override
-            public String getName() {
-                return "Jane Doe";
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now().minus(20, YEARS);
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.FEMALE;
-            }
-        };
-
-        patientService.create(patient1);
-        patientService.create(patient2);
+        return addPatientForm;
     }
 }
