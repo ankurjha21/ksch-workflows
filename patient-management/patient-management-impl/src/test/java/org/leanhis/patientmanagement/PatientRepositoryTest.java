@@ -32,32 +32,33 @@ public class PatientRepositoryTest {
         PatientEntity createdPatient = patientRepository.save(patientEntity);
 
         assertNotNull(createdPatient.getId());
+        assertNotNull(createdPatient.getPatientNumber());
     }
 
     @Test
     public void should_find_patient_by_name() {
         PatientEntity patient = createTestPatient("KSA-18-1001", "Jane Doe");
 
-        List<PatientEntity> retrievedPatients = patientRepository.findByNameOrMedicalRecordNumber("jane");
+        List<PatientEntity> retrievedPatients = patientRepository.findByIdOrName("jane");
 
         assertEquals("Could not findBy patient in database by searching her name", 1, retrievedPatients.size());
     }
 
     @Test
     public void should_find_patient_by_id() {
-        PatientEntity patient = createTestPatient("KSA-19-1002", "Jane Doe");
+        createTestPatient("KSA-19-1002", "Jane Doe");
 
-        List<PatientEntity> retrievedPatients = patientRepository.findByNameOrMedicalRecordNumber("-19-");
+        List<PatientEntity> retrievedPatients = patientRepository.findByIdOrName("-19-");
 
         assertEquals("Could not findBy patient in database by searching her medical record number", 1, retrievedPatients.size());
     }
 
-    private PatientEntity createTestPatient(String medicalRecordNumber, String name) {
+    private PatientEntity createTestPatient(String patientNumber, String name) {
         return patientRepository.save(PatientEntity.builder()
                 .dateOfBirth(LocalDate.now())
                 .gender(Gender.FEMALE)
                 .name(name)
-                .medicalRecordNumber(medicalRecordNumber)
+                .patientNumber(patientNumber)
                 .build());
     }
 }

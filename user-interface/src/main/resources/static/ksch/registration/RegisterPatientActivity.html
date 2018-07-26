@@ -34,7 +34,7 @@
             </div>
             <div class="col-xl-6">
                 <form wicket:id="patientSearchForm" class="form-inline float-right">
-                    <input wicket:id="patientSearchTerm" type="text" class="patientSearchTerm form-control" style="min-width: 350px;" placeholder="Medical Record Number or patient name">
+                    <input wicket:id="patientSearchTerm" type="text" class="patientSearchTerm form-control" style="min-width: 350px;" placeholder="Patient ID or name">
                     <input class="btn btn-outline-secondary" type="submit" value="Search patient"/>
                 </form>
             </div>
@@ -48,7 +48,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col" style="width:250px;">Medical Record Number</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Age</th>
@@ -57,7 +57,7 @@
                     </thead>
                 <tbody>
                     <tr wicket:id="patients">
-                        <th wicket:id="medicalRecordNumber" scope="row">[medical record number]</th>
+                        <th wicket:id="medicalRecordNumber" scope="row">[patient id]</th>
                         <td wicket:id="name">[name]</td>
                         <td wicket:id="gender">[gender]</td>
                         <td wicket:id="age">[age]</td>
@@ -75,7 +75,7 @@
                 <!-- Placeholder -->
             </div>
             <div class="col-xl-11">
-                Cannot find patient with given Medical Record Number or name.
+                Cannot find patient with given ID or name.
             </div>
         </div> <!-- end of no search results message -->
 

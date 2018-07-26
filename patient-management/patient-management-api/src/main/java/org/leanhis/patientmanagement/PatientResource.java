@@ -12,7 +12,7 @@ public class PatientResource implements Patient {
 
     private UUID id;
 
-    private String medicalRecordNumber;
+    private String patientNumber;
 
     private String name;
 

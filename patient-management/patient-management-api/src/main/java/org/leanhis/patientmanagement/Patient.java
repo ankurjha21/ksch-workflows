@@ -5,12 +5,10 @@ import java.util.UUID;
 
 public interface Patient {
 
+    // TODO It seems like this is only required for the Patient entity
     UUID getId();
 
-    /**
-     * @see <a href="https://ushik.ahrq.gov/ViewItemDetails?system=ps&itemKey=88720000">ushik.ahrq.gov</a>
-     */
-    String getMedicalRecordNumber();
+    String getPatientNumber();
 
     String getName();
 

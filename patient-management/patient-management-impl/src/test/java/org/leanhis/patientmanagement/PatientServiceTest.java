@@ -34,7 +34,7 @@ public class PatientServiceTest {
             }
 
             @Override
-            public String getMedicalRecordNumber() {
+            public String getPatientNumber() {
                 return "KSA-18-1005";
             }
 

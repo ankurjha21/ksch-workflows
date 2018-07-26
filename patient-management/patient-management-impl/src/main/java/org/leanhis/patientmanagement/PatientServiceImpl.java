@@ -24,7 +24,7 @@ public class PatientServiceImpl implements PatientService {
     // TODO Unit test for patient search by name or medical record number
     @Override
     public List<Patient> findBy(String nameOrMedicalRecordNumber) {
-        return patientRepository.findByNameOrMedicalRecordNumber(nameOrMedicalRecordNumber).stream()
+        return patientRepository.findByIdOrName(nameOrMedicalRecordNumber).stream()
                 .map(p -> (Patient) p)
                 .collect(Collectors.toList());
     }

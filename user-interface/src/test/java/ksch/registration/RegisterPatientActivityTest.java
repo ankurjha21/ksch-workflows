@@ -99,7 +99,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
-            public String getMedicalRecordNumber() {
+            public String getPatientNumber() {
                 return "KSA-18-1001";
             }
 
@@ -131,7 +131,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
             }
 
             @Override
-            public String getMedicalRecordNumber() {
+            public String getPatientNumber() {
                 return "KSA-18-1002";
             }
 

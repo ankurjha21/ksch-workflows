@@ -73,7 +73,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
                         protected void populateItem(ListItem<Patient> item) {
                             Patient patient = item.getModelObject();
 
-                            item.add(new Label("medicalRecordNumber", patient.getMedicalRecordNumber()));
+                            item.add(new Label("medicalRecordNumber", patient.getPatientNumber()));
                             item.add(new Label("name", patient.getName()));
                             item.add(new Label("gender", patient.getGender()));
                             item.add(new Label("age", patientService.getAgeInYears(patient)));

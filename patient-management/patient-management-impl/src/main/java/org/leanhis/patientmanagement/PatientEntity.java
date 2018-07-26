@@ -37,8 +37,8 @@ public class PatientEntity implements Patient {
     private UUID id;
 
     // TODO Add max length of 100 characters
-    @Column(name = "medicalrecordnumber")
-    private String medicalRecordNumber;
+    @Column(name = "patientnumber")
+    private String patientNumber;
 
     @Column(name = "name")
     private String name;
@@ -54,7 +54,7 @@ public class PatientEntity implements Patient {
 
     public static PatientEntity of(Patient patient) {
         return PatientEntity.builder()
-                .medicalRecordNumber(patient.getMedicalRecordNumber())
+                .patientNumber(patient.getPatientNumber())
                 .name(patient.getName())
                 .dateOfBirth(patient.getDateOfBirth())
                 .gender(patient.getGender())
