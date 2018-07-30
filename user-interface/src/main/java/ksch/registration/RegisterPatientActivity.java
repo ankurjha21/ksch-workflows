@@ -12,6 +12,7 @@ import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.request.flow.RedirectToUrlException;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.leanhis.patientmanagement.Gender;
@@ -24,6 +25,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @MountPath("/registration/register-patient")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
@@ -121,7 +123,9 @@ public class RegisterPatientActivity extends ApplicationFrame {
                         .dateOfBirth(LocalDate.parse(getAndResetObject(inputDateOfBirthModel)))
                         .build();
 
-                patientService.create(patient);
+                UUID patientId = patientService.create(patient).getId();
+
+                throw new RedirectToUrlException("/edit-patient?id=" + patientId);
             }
         };
 
