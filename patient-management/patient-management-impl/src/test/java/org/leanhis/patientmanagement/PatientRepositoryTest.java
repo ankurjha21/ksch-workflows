@@ -36,11 +36,12 @@ public class PatientRepositoryTest {
 
     @Test
     public void should_find_patient_by_name() {
-        PatientEntity patient = createTestPatient("KSA-18-1001", "Jane Doe");
+        createTestPatient("KSA-18-1001", "Jane Doe");
 
         List<PatientEntity> retrievedPatients = patientRepository.findByIdOrName("jane");
 
-        assertEquals("Could not findBy patient in database by searching her name", 1, retrievedPatients.size());
+        assertEquals("Could not findBy patient in database by searching her name",
+                1, retrievedPatients.size());
     }
 
     @Test
@@ -49,7 +50,8 @@ public class PatientRepositoryTest {
 
         List<PatientEntity> retrievedPatients = patientRepository.findByIdOrName("-19-");
 
-        assertEquals("Could not findBy patient in database by searching her medical record number", 1, retrievedPatients.size());
+        assertEquals("Could not findBy patient in database by searching her medical record number",
+                1, retrievedPatients.size());
     }
 
     private PatientEntity createTestPatient(String patientNumber, String name) {

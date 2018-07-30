@@ -33,11 +33,10 @@ public class PatientEntity implements Patient, Serializable {
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
-    )
+        )
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    // TODO Add max length of 100 characters
     @Column(name = "patientnumber")
     private String patientNumber;
 

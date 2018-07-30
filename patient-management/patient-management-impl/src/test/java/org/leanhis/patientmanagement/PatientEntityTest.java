@@ -3,9 +3,6 @@ package org.leanhis.patientmanagement;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
-import javax.management.RuntimeMBeanException;
-import java.io.IOException;
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.UUID;
@@ -25,16 +22,18 @@ public class PatientEntityTest {
 
     @SneakyThrows
     private void assertAllAttributesEqual(Patient patient, PatientEntity patientEntity) {
-        Arrays.stream(Patient.class.getDeclaredMethods()).filter(m -> m.getName().startsWith("get") || m.getName().startsWith("is")).forEach(m -> {
-            try {
-                Object valuePatient = m.invoke(patient);
-                Object valuePatientEnity = m.invoke(patientEntity);
+        Arrays.stream(Patient.class.getDeclaredMethods())
+                .filter(m -> m.getName().startsWith("get") || m.getName().startsWith("is")).forEach(m -> {
+                    try {
+                        Object valuePatient = m.invoke(patient);
+                        Object valuePatientEnity = m.invoke(patientEntity);
 
-                assertEquals(m.getName() + "() was not initialized in the PatientEntity", valuePatient, valuePatientEnity);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+                        assertEquals(m.getName() + "() was not initialized in the PatientEntity",
+                                valuePatient, valuePatientEnity);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 
     private Patient buildTestPatient() {
