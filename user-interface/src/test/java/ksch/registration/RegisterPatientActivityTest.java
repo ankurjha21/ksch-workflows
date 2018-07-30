@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import static java.time.temporal.ChronoUnit.YEARS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -105,129 +104,24 @@ public class RegisterPatientActivityTest extends WebPageTest {
     }
 
     private void createDummyPatients() {
-        Patient patient1 = new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
 
-            @Override
-            public void setId(UUID id) {
+        Patient patient1 = Patient.builder()
+                .id(UUID.randomUUID())
+                .patientNumber("KSA-18-1001")
+                .name("John Doe")
+                .gender(Gender.MALE)
+                .dateOfBirth(LocalDate.now())
+                .address("Kirpal Sagar")
+                .build();
 
-            }
-
-            @Override
-            public String getPatientNumber() {
-                return "KSA-18-1001";
-            }
-
-            @Override
-            public void setPatientNumber(String patientNumber) {
-
-            }
-
-            @Override
-            public String getName() {
-                return "John Doe";
-            }
-
-            @Override
-            public void setName(String name) {
-
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now().minus(25, YEARS);
-            }
-
-            @Override
-            public void setDateOfBirth(LocalDate dateOfBirth) {
-
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.MALE;
-            }
-
-            @Override
-            public void setGender(Gender gender) {
-
-            }
-
-            @Override
-            public String getAddress() {
-                return "Kirpal Sagar";
-            }
-
-            @Override
-            public void setAddress(String address) {
-
-            }
-        };
-
-        Patient patient2 = new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
-
-            @Override
-            public void setId(UUID id) {
-
-            }
-
-            @Override
-            public String getPatientNumber() {
-                return "KSA-18-1002";
-            }
-
-            @Override
-            public void setPatientNumber(String patientNumber) {
-
-            }
-
-            @Override
-            public String getName() {
-                return "Jane Doe";
-            }
-
-            @Override
-            public void setName(String name) {
-
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now().minus(20, YEARS);
-            }
-
-            @Override
-            public void setDateOfBirth(LocalDate dateOfBirth) {
-
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.FEMALE;
-            }
-
-            @Override
-            public void setGender(Gender gender) {
-
-            }
-
-            @Override
-            public String getAddress() {
-                return "Kirpal Sagar";
-            }
-
-            @Override
-            public void setAddress(String address) {
-
-            }
-        };
+        Patient patient2 = Patient.builder()
+                .id(UUID.randomUUID())
+                .patientNumber("KSA-18-1002")
+                .name("Jane Doe")
+                .gender(Gender.FEMALE)
+                .dateOfBirth(LocalDate.now())
+                .address("Kirpal Sagar")
+                .build();
 
         patientService.create(patient1);
         patientService.create(patient2);

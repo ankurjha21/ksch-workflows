@@ -1,8 +1,3 @@
-plugins {
-    id 'org.springframework.boot' version '2.0.2.RELEASE'
-}
-
-apply plugin: 'io.spring.dependency-management'
 
 sourceSets.main.resources {
     srcDir "${project(':user-interface').projectDir}/src/main/resources/static"
@@ -13,7 +8,7 @@ dependencies {
 
     compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.1'
     compile 'org.wicketstuff:wicketstuff-annotation:8.0.0'
-    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.2.RELEASE'
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }

@@ -27,66 +27,13 @@ public class PatientServiceTest {
     }
 
     private Patient buildTestPatient(LocalDate dateOfBirth) {
-        return new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
-
-            @Override
-            public void setId(UUID id) {
-
-            }
-
-            @Override
-            public String getPatientNumber() {
-                return "KSA-18-1005";
-            }
-
-            @Override
-            public void setPatientNumber(String patientNumber) {
-
-            }
-
-            @Override
-            public String getName() {
-                return "John Doe";
-            }
-
-            @Override
-            public void setName(String name) {
-
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return dateOfBirth;
-            }
-
-            @Override
-            public void setDateOfBirth(LocalDate dateOfBirth) {
-
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.MALE;
-            }
-
-            @Override
-            public void setGender(Gender gender) {
-
-            }
-
-            @Override
-            public String getAddress() {
-                return "Kirpal Sagar";
-            }
-
-            @Override
-            public void setAddress(String address) {
-
-            }
-        };
+        return Patient.builder()
+                .id(UUID.randomUUID())
+                .patientNumber("KSA-18-1005")
+                .name("John Doe")
+                .dateOfBirth(dateOfBirth)
+                .gender(Gender.MALE)
+                .address("Kirpal Sagar")
+                .build();
     }
 }

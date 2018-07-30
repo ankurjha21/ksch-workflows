@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import static java.time.temporal.ChronoUnit.YEARS;
 import static org.junit.Assert.assertEquals;
 
 public class EditPatientDetailsActivityTest extends WebPageTest {
@@ -50,67 +49,14 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     }
 
     private Patient createDummyPatient() {
-        Patient patient = new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
-
-            @Override
-            public void setId(UUID id) {
-
-            }
-
-            @Override
-            public String getPatientNumber() {
-                return "KSA-18-1001";
-            }
-
-            @Override
-            public void setPatientNumber(String patientNumber) {
-
-            }
-
-            @Override
-            public String getName() {
-                return "John Doe";
-            }
-
-            @Override
-            public void setName(String name) {
-
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now().minus(25, YEARS);
-            }
-
-            @Override
-            public void setDateOfBirth(LocalDate dateOfBirth) {
-
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.MALE;
-            }
-
-            @Override
-            public void setGender(Gender gender) {
-
-            }
-
-            @Override
-            public String getAddress() {
-                return "Kirpal Sagar";
-            }
-
-            @Override
-            public void setAddress(String address) {
-
-            }
-        };
+        Patient patient = Patient.builder()
+                .id(UUID.randomUUID())
+                .patientNumber("KSA-18-1001")
+                .name("John Doe")
+                .gender(Gender.MALE)
+                .dateOfBirth(LocalDate.now())
+                .address("Kirpal Sagar")
+                .build();
 
         return patientService.create(patient);
     }

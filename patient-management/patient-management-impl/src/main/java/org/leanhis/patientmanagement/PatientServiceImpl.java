@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
@@ -19,15 +18,13 @@ public class PatientServiceImpl implements PatientService {
     // TODO Unit test for patient creation
     @Override
     public Patient create(Patient patient) {
-        return patientRepository.save(PatientEntity.of(patient));
+        return patientRepository.save(patient);
     }
 
     // TODO Unit test for patient search by name or medical record number
     @Override
     public List<Patient> findBy(String nameOrMedicalRecordNumber) {
-        return patientRepository.findByIdOrName(nameOrMedicalRecordNumber).stream()
-                .map(p -> (Patient) p)
-                .collect(Collectors.toList());
+        return patientRepository.findByIdOrName(nameOrMedicalRecordNumber);
     }
 
     @Override
@@ -46,6 +43,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void update(Patient patient) {
-        patientRepository.save(PatientEntity.of(patient));
+        patientRepository.save(patient);
     }
 }

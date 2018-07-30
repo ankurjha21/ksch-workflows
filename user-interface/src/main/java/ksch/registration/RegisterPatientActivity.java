@@ -17,7 +17,6 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
-import org.leanhis.patientmanagement.PatientResource;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -116,7 +115,7 @@ public class RegisterPatientActivity extends ApplicationFrame {
         Form<Void> addPatientForm = new Form<Void>("addPatientForm") {
             @Override
             protected void onSubmit() {
-                PatientResource patient = PatientResource.builder()
+                Patient patient = Patient.builder()
                         .name(getAndResetObject(inputNameModel))
                         .address(getAndResetObject(inputAddressModel))
                         .gender(Gender.valueOf(getAndResetObject(inputGenderModel).toUpperCase()))

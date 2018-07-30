@@ -1,31 +1,32 @@
 package org.leanhis.patientmanagement;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
-public interface Patient {
+import static lombok.AccessLevel.PRIVATE;
 
-    UUID getId();
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor(access = PRIVATE)
+@AllArgsConstructor
+public class Patient {
 
-    void setId(UUID id);
+    private UUID id;
 
-    String getPatientNumber();
+    private String patientNumber;
 
-    void setPatientNumber(String patientNumber);
+    private String name;
 
-    String getName();
+    private LocalDate dateOfBirth;
 
-    void setName(String name);
+    private Gender gender;
 
-    LocalDate getDateOfBirth();
-
-    void setDateOfBirth(LocalDate dateOfBirth);
-
-    Gender getGender();
-
-    void setGender(Gender gender);
-
-    String getAddress();
-
-    void setAddress(String address);
+    private String address;
 }
