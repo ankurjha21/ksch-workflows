@@ -1,9 +1,8 @@
 
 apply plugin: 'idea'
 
-
 allprojects  {
-    group = 'io.github.ksch'
+    group = 'org.ks-plus'
     version = '0.1.0-SNAPSHOT'
 }
 
