@@ -145,8 +145,12 @@ public class RegisterPatientActivity extends ApplicationFrame {
 }
 
 class AddPatientFormProperties implements Serializable {
+
     private String inputName;
+
     private String inputGender;
+
     private String inputDateOfBirth;
+
     private String inputAddress;
 }

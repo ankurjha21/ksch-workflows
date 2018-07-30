@@ -3,7 +3,6 @@ package ksch.registration;
 import ksch.WebPageTest;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.tester.FormTester;
-import org.junit.Assert;
 import org.junit.Test;
 import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;

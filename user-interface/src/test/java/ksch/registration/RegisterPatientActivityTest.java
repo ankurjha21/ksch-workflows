@@ -2,7 +2,6 @@ package ksch.registration;
 
 import ksch.WebPageTest;
 import org.apache.wicket.util.tester.FormTester;
-import org.junit.Assert;
 import org.junit.Test;
 import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
@@ -80,7 +79,8 @@ public class RegisterPatientActivityTest extends WebPageTest {
         assertTrue("Notification about missing search results wasn't rendered.",
                 tester.getLastResponseAsString().contains("Cannot find patient with given ID or name"));
         assertFalse("Table with patients was rendered even though there are no patients in the search results",
-                tester.getLastResponseAsString().contains("<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
+                tester.getLastResponseAsString().contains(
+                        "<th scope=\"col\" style=\"width:250px;\">Medical Record Number</th>"));
     }
 
     @Test
